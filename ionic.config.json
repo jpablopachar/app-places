@@ -1,0 +1,7 @@
+{
+  "name": "app-places",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
