@@ -27,6 +27,7 @@ export class PlaceService {
       .get<{ [key: string]: Place }>(`${this.urlApi}/offered-places.json`)
       .pipe(
         map((resData) => {
+          console.log(resData);
           const places = [];
           for (const key in resData) {
             if (resData.hasOwnProperty(key)) {
