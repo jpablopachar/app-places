@@ -1,3 +1,5 @@
+import { PlaceLocation } from './location';
+
 export class Place {
   constructor(
     public title: string,
@@ -7,6 +9,7 @@ export class Place {
     public availableFrom: Date,
     public availableTo: Date,
     public userId: string,
-    public id: string,
+    public id?: string,
+    public location?: PlaceLocation,
   ) { }
 }

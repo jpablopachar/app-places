@@ -16,6 +16,7 @@ import {
 } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { CreateBookingComponent } from 'src/app/bookings/create-booking/create-booking.component';
+import { MapModalComponent } from 'src/app/shared/map-modal/map-modal.component';
 import { AuthService } from '../../../auth/auth.service';
 import { BookingService } from '../../../bookings/booking.service';
 import { Place } from '../../place';
@@ -57,7 +58,9 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
         .getPlace(paramMap.get('placeId'))
         .subscribe(
           (place) => {
+            console.log(place);
             this.place = place;
+            console.log(this.place);
             this.isBookable = place.userId !== this.authService.userId;
             this.isLoading = false;
           },
@@ -144,6 +147,25 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
                 });
             });
         }
+      });
+  }
+
+  public onShowFullMap(): void {
+    this.modalCtrl
+      .create({
+        component: MapModalComponent,
+        componentProps: {
+          center: {
+            lat: this.place.location.lat,
+            lng: this.place.location.lng
+          },
+          selectable: false,
+          closeButtonText: 'Close',
+          title: this.place.location.address
+        }
+      })
+      .then(modalEl => {
+        modalEl.present();
       });
   }
 

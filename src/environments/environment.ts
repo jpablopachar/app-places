@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  firebaseApi: 'https://app-places-d6bd9-default-rtdb.firebaseio.com'
+  firebaseApi: 'https://app-places-d6bd9-default-rtdb.firebaseio.com',
+  googleMapsApiKey: 'AIzaSyD1TJddE2rEfM8_UoL9hkPMLOZNTznXtzI'
 };
 
 /*

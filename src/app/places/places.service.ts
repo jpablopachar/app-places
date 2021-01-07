@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
+import { PlaceLocation } from './location';
 import { Place } from './place';
 
 @Injectable({
@@ -40,7 +41,8 @@ export class PlaceService {
                   new Date(resData[key].availableFrom),
                   new Date(resData[key].availableTo),
                   resData[key].userId,
-                  key
+                  key,
+                  resData[key].location
                 )
               );
             }
@@ -66,7 +68,8 @@ export class PlaceService {
             new Date(placeData.availableFrom),
             new Date(placeData.availableTo),
             placeData.userId,
-            id
+            id,
+            placeData.location
           );
         })
       );
@@ -77,7 +80,8 @@ export class PlaceService {
     description: string,
     price: number,
     dateFrom: Date,
-    dateTo: Date
+    dateTo: Date,
+    location: PlaceLocation
   ): Observable<Place[]> {
     let generatedId: string;
     const newPlace = new Place(
@@ -88,7 +92,8 @@ export class PlaceService {
       dateFrom,
       dateTo,
       this.authService.userId,
-      Math.random().toString()
+      Math.random().toString(),
+      location
     );
     return this.http
       .post<{ name: string }>(`${this.urlApi}/offered-places.json`, {
@@ -135,7 +140,8 @@ export class PlaceService {
           oldPlace.availableFrom,
           oldPlace.availableTo,
           oldPlace.userId,
-          oldPlace.id
+          oldPlace.id,
+          oldPlace.location
         );
         return this.http.put(`${this.urlApi}/offered-places/${placeId}.json`, {
           ...updatedPlaces[updatedPlaceIndex],
