@@ -58,9 +58,7 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
         .getPlace(paramMap.get('placeId'))
         .subscribe(
           (place) => {
-            console.log(place);
             this.place = place;
-            console.log(this.place);
             this.isBookable = place.userId !== this.authService.userId;
             this.isLoading = false;
           },
@@ -113,7 +111,6 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
   }
 
   public openBookingModal(mode: 'select' | 'random'): void {
-    console.log(mode);
     this.modalCtrl
       .create({
         component: CreateBookingComponent,

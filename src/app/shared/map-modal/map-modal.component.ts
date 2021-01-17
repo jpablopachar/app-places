@@ -33,7 +33,6 @@ export class MapModalComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.getGoogleMaps()
       .then((googleMaps) => {
-        console.log(googleMaps);
         this.googleMaps = googleMaps;
         const mapEl = this.mapElementRef.nativeElement;
         const map = new googleMaps.Map(mapEl, {

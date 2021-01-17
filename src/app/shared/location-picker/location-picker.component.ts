@@ -26,7 +26,6 @@ export class LocationPickerComponent {
   public onPickLocation(): void {
     this.modalCtrl.create({ component: MapModalComponent }).then(modalEl => {
       modalEl.onDidDismiss().then(modalData => {
-        console.log(modalData);
         if (!modalData.data) {
           return;
         }
