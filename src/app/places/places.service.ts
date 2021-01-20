@@ -74,19 +74,31 @@ export class PlaceService {
       );
   }
 
+  public uploadImage(image: File): Observable<{imageUrl: string, imagePath: string}> {
+    const uploadData = new FormData();
+
+    uploadData.append('image', image);
+
+    return this.http.post<{imageUrl: string, imagePath: string}>(
+      'https://us-central1-app-places-d6bd9.cloudfunctions.net/storeImage',
+      uploadData
+    );
+  }
+
   public addPlace(
     title: string,
     description: string,
     price: number,
     dateFrom: Date,
     dateTo: Date,
-    location: PlaceLocation
+    location: PlaceLocation,
+    imageUrl: string
   ): Observable<Place[]> {
     let generatedId: string;
     const newPlace = new Place(
       title,
       description,
-      'https://lonelyplanetimages.imgix.net/mastheads/GettyImages-538096543_medium.jpg?sharp=10&vib=20&w=1200',
+      imageUrl,
       price,
       dateFrom,
       dateTo,
